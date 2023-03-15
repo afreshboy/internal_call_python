@@ -21,7 +21,7 @@ def internal_call_post(to_service_id, uri, req, headers):
     from_service_id = os.getenv('SERVICE_ID')
     host = 'http://%s-%s.dycloud.service%s' % (from_service_id, to_service_id, uri)
     try:
-        response = requests.post(host, data=req)
+        response = requests.post(host, data=req, headers=headers)
         res = response.text
         print(res)
         response.close()

@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from . import internal_call
-
-from . import base_req
+from .internal_call import *
+from .base_req import *
 import json
 
 
@@ -20,7 +19,7 @@ def get_count(request):
 def post_count(request):
     if request.method == 'POST':
         body = request.body
-        req = json.loads(body, object_hook=base_req.dict2base_req)
+        req = json.loads(body, object_hook=dict2base_req)
         return HttpResponse(int(req.num1 + req.num2))
     else:
         return HttpResponse('invalid method: %s' % request.method)
@@ -43,11 +42,11 @@ def internal_call(request):
             'num1': num1,
             'num2': num2
         }
-        resp = internal_call.internal_call_get(service_id, uri, param_map, headers)
+        resp = internal_call_get(service_id, uri, param_map, headers)
         return HttpResponse(resp)
     elif method == 'POST':
-        req = base_req.BaseReq(num1, num2)
-        resp = internal_call.internal_call_post(service_id, uri, req, headers)
+        req = BaseReq(num1, num2)
+        resp = internal_call_post(service_id, uri, req, headers)
         return HttpResponse(resp)
 
 
