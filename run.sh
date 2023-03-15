@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python manage.py runserver
+python manage.py runserver 0000:8000
