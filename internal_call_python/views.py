@@ -53,4 +53,4 @@ def internal_call(request):
 
 @csrf_exempt
 def ping(request):
-    pass
+    return HttpResponse("success")
