@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from . import internal_call
@@ -50,3 +49,8 @@ def internal_call(request):
         req = base_req.BaseReq(num1, num2)
         resp = internal_call.internal_call_post(service_id, uri, req, headers)
         return HttpResponse(resp)
+
+
+@csrf_exempt
+def ping(request):
+    pass

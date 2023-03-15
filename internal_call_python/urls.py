@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/get_count', views.get_count),
     path('api/v1/post_count', views.post_count),
-    path('api/v1/internal_call', views.internal_call)
+    path('api/v1/internal_call', views.internal_call),
+    path('v1/ping', views.ping)
 ]
