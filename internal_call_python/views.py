@@ -46,7 +46,8 @@ def internal_call(request):
         return HttpResponse(resp)
     elif method == 'POST':
         req = BaseReq(num1, num2)
-        resp = internal_call_post(service_id, uri, req, headers)
+        body = json.dumps(req, default=base_req2dict)
+        resp = internal_call_post(service_id, uri, body, headers)
         return HttpResponse(resp)
 
 
