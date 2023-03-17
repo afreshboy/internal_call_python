@@ -18,7 +18,7 @@ def get_count(request):
 @csrf_exempt
 def post_count(request):
     if request.method == 'POST':
-        body = request.body
+        body = request.body.decode('utf-8')
         req = json.loads(body, object_hook=dict2base_req)
         return HttpResponse(int(req.num1 + req.num2))
     else:
