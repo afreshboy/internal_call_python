@@ -42,13 +42,26 @@ def internal_call(request):
             'num1': num1,
             'num2': num2
         }
-        resp = internal_call_get(service_id, uri, param_map, headers)
-        return HttpResponse(resp)
+        try:
+            response = HttpResponse(internal_call_get(service_id, uri, param_map, headers))
+            return response
+        except:
+            response = HttpResponse("error")
+            response.status_code = 500
+            return response
     elif method == 'POST':
-        req = BaseReq(num1, num2)
-        body = json.dumps(req, default=base_req2dict)
-        resp = internal_call_post(service_id, uri, body, headers)
-        return HttpResponse(resp)
+        try:
+            req = BaseReq(num1, num2)
+            body = json.dumps(req, default=base_req2dict)
+            response = HttpResponse(internal_call_post(service_id, uri, body, headers))
+            return response
+        except:
+            response = HttpResponse("error")
+            response.status_code = 500
+            return response
+    response = HttpResponse("invalid method: %s" % method)
+    response.status_code = 403
+    return response
 
 
 @csrf_exempt
